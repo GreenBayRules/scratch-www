@@ -276,10 +276,15 @@ class Preview extends React.Component {
         );
     }
     render () {
+        const backpackOptions = {
+            host: process.env.BACKPACK_HOST,
+            visible: true
+        };
         return (
             this.props.playerMode ?
                 <Page>
                     <PreviewPresentation
+                        backpackOptions={backpackOptions}
                         comments={this.props.comments}
                         editable={this.state.editable}
                         extensions={this.state.extensions}
@@ -310,6 +315,7 @@ class Preview extends React.Component {
                 </Page> :
                 <IntlGUI
                     enableCommunity
+                    backpackOptions={backpackOptions}
                     basePath="/"
                     className="gui"
                     projectId={this.state.projectId}
