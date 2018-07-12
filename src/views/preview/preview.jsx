@@ -284,6 +284,7 @@ class Preview extends React.Component {
             this.props.playerMode ?
                 <Page>
                     <PreviewPresentation
+                        assetHost={this.props.assetHost}
                         backpackOptions={backpackOptions}
                         comments={this.props.comments}
                         editable={this.state.editable}
@@ -297,6 +298,7 @@ class Preview extends React.Component {
                         loved={this.props.loved}
                         originalInfo={this.props.original}
                         parentInfo={this.props.parent}
+                        projectHost={this.props.projectHost}
                         projectId={this.state.projectId}
                         projectInfo={this.props.projectInfo}
                         remixes={this.props.remixes}
@@ -315,9 +317,11 @@ class Preview extends React.Component {
                 </Page> :
                 <IntlGUI
                     enableCommunity
+                    assetHost={this.props.assetHost}
                     backpackOptions={backpackOptions}
                     basePath="/"
                     className="gui"
+                    projectHost={this.props.projectHost}
                     projectId={this.state.projectId}
                 />
         );
@@ -325,6 +329,7 @@ class Preview extends React.Component {
 }
 
 Preview.propTypes = {
+    assetHost: PropTypes.string.isRequired,
     comments: PropTypes.arrayOf(PropTypes.object),
     faved: PropTypes.bool,
     fullScreen: PropTypes.bool,
@@ -340,6 +345,7 @@ Preview.propTypes = {
     parent: projectShape,
     playerMode: PropTypes.bool,
     projectInfo: projectShape,
+    projectHost: PropTypes.string.isRequired,
     remixes: PropTypes.arrayOf(PropTypes.object),
     sessionStatus: PropTypes.string,
     setFavedStatus: PropTypes.func.isRequired,
@@ -361,6 +367,8 @@ Preview.propTypes = {
 };
 
 Preview.defaultProps = {
+    assetHost: process.env.ASSET_HOST,
+    projectHost: process.env.PROJECT_HOST,
     sessionStatus: sessionActions.Status.NOT_FETCHED,
     user: {}
 };
